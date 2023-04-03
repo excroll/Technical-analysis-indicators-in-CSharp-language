@@ -238,16 +238,18 @@ namespace Indicators_CSharp
                 Console.WriteLine();
 
 
-                 //////////////////////////////////////////////////////////////////////////////
-                 //Experemental 
+                //////////////////////////////////////////////////////////////////////////////
+                //Experemental
 
 
                 //The experimental method calculates the minimum value of the price for a certain period
                 //***************************************************************
 
+
                 /*var client2 = new BinanceClient();
                 var interval = 1;
-                var MinMaxPeriod = 100;
+                var MinMaxPeriod = 100;  //klines period
+                decimal thresold = 0.3m; //deviatioan of min-max value klines
 
                 var candles = client2.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute, DateTime.UtcNow.AddMinutes(-interval * period), DateTime.UtcNow, MinMaxPeriod).Result;
 
@@ -261,10 +263,13 @@ namespace Indicators_CSharp
                         if (candle.HighPrice > max) max = (decimal)candle.HighPrice;
                     }
 
-                    *//*decimal currentPrice = candles.Data.Last().ClosePrice;*//*
+                    decimal currentPrice = candles.Data.Last().ClosePrice;
                     var ticker = client2.SpotApi.ExchangeData.GetPriceAsync(symbol).Result;
-                    if (ticker.Data.Price <= min)
+                    decimal range = (max - min) * thresold;
+
+                    if (currentPrice >= min - range && currentPrice <= min + range)
                     {
+                        
                         // The price is at the minimum, perform a certain logic, for example, buy on the market
                         enter_points += 1;
                         Console.WriteLine("The candlestick minimum indicator has triggered, the current value: " + enter_points);
@@ -273,25 +278,26 @@ namespace Indicators_CSharp
 
                     //***************************************************************************
                     //Fibonacci has not been tested properly ************************************
-                    decimal currentPrice = result1m.Data.Last().ClosePrice;
+                    decimal currentPriceFibo = result1m.Data.Last().ClosePrice;
 
                     // Checking Fibonacci levels
-                    var fibonacciLevels = GetFibonacciLevels(currentPrice, min, max);
+                    var fibonacciLevels = GetFibonacciLevels(currentPriceFibo, min, max);
 
                     // Check if the price is at the 23.6% Fibonacci level
-                    if (currentPrice < fibonacciLevels.Level1)
+                    if (currentPriceFibo < fibonacciLevels.Level1)
                     {
                         enter_points += 1;
                         Console.WriteLine("Fibonacci indicator triggered, current value: " + enter_points);
                     }
 
 
-                 //shows the wrong data!!!!! ************************************************
-                // Alligator ***************************************************************
-                var(jawMA, teethMA, lipsMA) = Alligator(arrHigh1m, arrLow1m, jawPeriod, teethPeriod, lipsPeriod);
-                Console.WriteLine("Alligator value: {0}, {1}, {2}", jawMA[jawMA.Length - 1], teethMA[teethMA.Length - 1], lipsMA[lipsMA.Length - 1]);
-                }
-            */
+                    //shows the wrong data!!!!! ************************************************
+                    // Alligator ***************************************************************
+                    var (jawMA, teethMA, lipsMA) = Alligator(arrHigh1m, arrLow1m, jawPeriod, teethPeriod, lipsPeriod);
+                    Console.WriteLine("Alligator value: {0}, {1}, {2}", jawMA[jawMA.Length - 1], teethMA[teethMA.Length - 1], lipsMA[lipsMA.Length - 1]);
+
+                }*/
+
             }
         }
 
