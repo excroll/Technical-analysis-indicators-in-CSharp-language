@@ -6,8 +6,8 @@
 - [x] RSI
 - [x] STOCH
 - [x] BollingerBands
-- [ ] DonchianChannels
-- [ ] IchimokuCloud
+- [x] DonchianChannels
+- [x] IchimokuCloud
 - [ ] and more...
 
 This project was created in Visual Studio 2022, DotNet-6.0
