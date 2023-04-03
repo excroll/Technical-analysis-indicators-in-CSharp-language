@@ -11,8 +11,8 @@
 - [ ] and more...
 
 This project was created in Visual Studio 2022, DotNet-6.0.
+Press debug to run the script
 
-Press debug to run the script.
 Indicators data was tested on Binance spot tradingview terminal.
 
 The libraries used for the example where:
