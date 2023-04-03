@@ -46,6 +46,10 @@ namespace Indicators_CSharp
         static int slowD1m = 1;
         static int smooth1m = 3;
 
+        //SMA
+        static int SMA10 = 10;
+        static int SMA30 = 30;
+
         //Bolliger
         static int period = 20;
         static double deviation = 2;
@@ -130,11 +134,11 @@ namespace Indicators_CSharp
                 //SMA10*30*********************************************
                 decimal[] arrSMA = closePrices1m.ToArray();
 
-                var SMA1m10 = SMA(arrCloses1m, 10);
+                var SMA1m10 = SMA(arrCloses1m, SMA10);
                 var SMA1m10_val = SMA1m10[SMA1m10.Length - 1];
                 var SMA1m10_val_format1m = Math.Round(SMA1m10_val, 2);
 
-                var SMA1m30 = SMA(arrCloses1m, 30);
+                var SMA1m30 = SMA(arrCloses1m, SMA30);
                 var SMA1m30_val = SMA1m30[SMA1m30.Length - 1];
                 var SMA1m30_val_format1m = Math.Round(SMA1m30_val, 2);
 
@@ -219,7 +223,7 @@ namespace Indicators_CSharp
                 Console.WriteLine();
 
 
-                ///////////////////////////////////////////////////////////////////////////////
+                 //////////////////////////////////////////////////////////////////////////////
                 //Experemental 
 
 
@@ -273,7 +277,7 @@ namespace Indicators_CSharp
 
 
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         //INDICATORS AND SOFT METODS////////////////////////////////////////////////////////////////////////////
         private class FibonacciLevels
         {
