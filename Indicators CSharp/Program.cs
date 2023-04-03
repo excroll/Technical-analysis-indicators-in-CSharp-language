@@ -38,7 +38,7 @@ namespace Indicators_CSharp
         //Supertrend
         //The supertrend line may lag behind the exchange values when the Factor increases,
         //it is recommended not more than 1-2
-        static int STPeriod = 10;
+        static int STPeriod = 10; 
         static double STFactor = 3;
 
         //Stoch
@@ -423,7 +423,7 @@ namespace Indicators_CSharp
 
         public static double[] RSI(double[] close, int period)
         {
-
+            
             double[] prices = close;
 
 
@@ -511,26 +511,6 @@ namespace Indicators_CSharp
             return cci;
         }
 
-        public static double ATR_(double[] high, double[] low, double[] close, int period)
-        {
-            double sum = 0;
-            for (int i = period; i < high.Length; i++)
-            {
-                sum += Math.Max(high[i] - low[i], Math.Max(Math.Abs(high[i] - close[i - 1]), Math.Abs(low[i] - close[i - 1])));
-            }
-
-            double atr = sum / period;
-
-            for (int i = period; i < high.Length; i++)
-            {
-                double tr = Math.Max(high[i] - low[i], Math.Max(Math.Abs(high[i] - close[i - 1]), Math.Abs(low[i] - close[i - 1])));
-                atr = ((period - 1) * atr + tr) / period;
-            }
-
-            return atr;
-        }
-
-
         public class Supertrend
         {
             public static (double[], bool) Calculate(double[] high, double[] low, double[] close, int period, double multiplier)
@@ -601,7 +581,7 @@ namespace Indicators_CSharp
 
 
         }
-
+    
         public static double[] SMA(double[] input, int period)
         {
             int length = input.Length;
