@@ -1,4 +1,4 @@
-# Technical analysis indicators in CSharp language
+# Technical analysis indicators in CSharp
 
 SUPERTREND, MACD, SMA, RSI, STOCH, BollingerBands, DonchianChannels, IchimokuCloud, and more...
 
