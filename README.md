@@ -2,7 +2,7 @@
 
 SUPERTREND, MACD, SMA, RSI, STOCH, BollingerBands, DonchianChannels, IchimokuCloud, and more...
 
-This project was created in Visual Studio 2022, .Net-6.0
+This project was created in Visual Studio 2022, DotNet-6.0
 
 Press debug to run the script
 
