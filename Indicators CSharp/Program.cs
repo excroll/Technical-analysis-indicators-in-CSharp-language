@@ -46,6 +46,15 @@ namespace Indicators_CSharp
         static int slowD1m = 1;
         static int smooth1m = 3;
 
+        //Alligator
+        static int jawPeriod = 21;
+        static int teethPeriod = 8;
+        static int lipsPeriod = 13;
+
+        //AwesomeOscilator(Bill Williams)
+        static int sma1 = 5;
+        static int sma2 = 34;
+
         //SMA
         static int SMA10 = 10;
         static int SMA30 = 30;
@@ -129,6 +138,12 @@ namespace Indicators_CSharp
                 var sign1m_val_format = Math.Round(signalLine_val, 3);
 
                 Console.WriteLine("Long MACD: {0}, Signal: {1}", macd1m_val_format, sign1m_val_format);
+   
+
+                //AwesomeOscilator(Bill Williams)*************************************
+                double[] ao = AwesomeOscillator(arrHigh1m, arrLow1m, sma1, sma2);
+                var ao_Format = Math.Round(ao[ao.Length - 1], 2);
+                Console.WriteLine("AwesomeOscillator: {0}", ao_Format);
 
 
                 //SMA10*30*********************************************
@@ -224,7 +239,7 @@ namespace Indicators_CSharp
 
 
                  //////////////////////////////////////////////////////////////////////////////
-                //Experemental 
+                 //Experemental 
 
 
                 //The experimental method calculates the minimum value of the price for a certain period
@@ -269,7 +284,14 @@ namespace Indicators_CSharp
                         enter_points += 1;
                         Console.WriteLine("Fibonacci indicator triggered, current value: " + enter_points);
                     }
-                }*/
+
+
+                 //shows the wrong data!!!!! ************************************************
+                // Alligator ***************************************************************
+                var(jawMA, teethMA, lipsMA) = Alligator(arrHigh1m, arrLow1m, jawPeriod, teethPeriod, lipsPeriod);
+                Console.WriteLine("Alligator value: {0}, {1}, {2}", jawMA[jawMA.Length - 1], teethMA[teethMA.Length - 1], lipsMA[lipsMA.Length - 1]);
+                }
+            */
             }
         }
 
@@ -814,6 +836,51 @@ namespace Indicators_CSharp
                 return senkouSpanA[index] < senkouSpanB[index] && highValues[index] < senkouSpanA[index] && lowValues[index] < senkouSpanB[index];
             }
         }
+
+        public static (double[], double[], double[]) Alligator(double[] highs, double[] lows, int jawPeriod, int teethPeriod, int lipsPeriod)
+        {
+            double[] jawMA = SMA(highs, jawPeriod);
+            double[] teethMA = SMA(highs, teethPeriod);
+            double[] lipsMA = SMA(highs, lipsPeriod);
+
+            double[] result = new double[highs.Length];
+            for (int i = 0; i < highs.Length; i++)
+            {
+                if (i < jawPeriod || i < teethPeriod || i < lipsPeriod)
+                {
+                    result[i] = double.NaN;
+                }
+                else
+                {
+                    result[i] = (jawMA[i] + teethMA[i]) / 2;
+                }
+            }
+            return (jawMA, teethMA, lipsMA);
+        }
+
+        public static double[] AwesomeOscillator(double[] highs, double[] lows, int period1, int period2)
+        {
+            double[] medianPrices = new double[highs.Length];
+            double[] sma1 = new double[highs.Length];
+            double[] sma2 = new double[highs.Length];
+            double[] ao = new double[highs.Length];
+
+            for (int i = 0; i < highs.Length; i++)
+            {
+                medianPrices[i] = (highs[i] + lows[i]) / 2;
+            }
+
+            sma1 = SMA(medianPrices, period1);
+            sma2 = SMA(medianPrices, period2);
+
+            for (int i = 0; i < highs.Length; i++)
+            {
+                ao[i] = sma1[i] - sma2[i];
+            }
+
+            return ao;
+        }
+
 
 
         static double[] ConvertToDouble(List<decimal> list)
