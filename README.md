@@ -8,6 +8,7 @@
 - [x] BollingerBands
 - [x] DonchianChannels
 - [x] IchimokuCloud
+- [x] AwesomeOscilator(Bill Williams)
 - [ ] and more...
 
 This project was created in Visual Studio 2022, DotNet-6.0.
