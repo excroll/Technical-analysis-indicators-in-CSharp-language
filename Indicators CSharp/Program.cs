@@ -52,8 +52,8 @@ namespace Indicators_CSharp
         static int lipsPeriod = 13;
 
         //AwesomeOscilator(Bill Williams)
-        static int sma1 = 5;
-        static int sma2 = 34;
+        static int AOsma1 = 5;
+        static int AOsma2 = 34;
 
         //SMA
         static int SMA10 = 10;
@@ -141,7 +141,7 @@ namespace Indicators_CSharp
    
 
                 //AwesomeOscilator(Bill Williams)*************************************
-                double[] ao = AwesomeOscillator(arrHigh1m, arrLow1m, sma1, sma2);
+                double[] ao = AwesomeOscillator(arrHigh1m, arrLow1m, AOsma1, AOsma2);
                 var ao_Format = Math.Round(ao[ao.Length - 1], 2);
                 Console.WriteLine("AwesomeOscillator: {0}", ao_Format);
 
@@ -248,7 +248,7 @@ namespace Indicators_CSharp
 
                 /*var client2 = new BinanceClient();
                 var interval = 1;
-                var MinMaxPeriod = 100;  //klines period
+                var MinMaxPeriod = 50;  //klines period (last 50 OHLC data klines)
                 decimal deviation = 0.3m; //deviation of min-max value klines
 
                 var candles = client2.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute, DateTime.UtcNow.AddMinutes(-interval * period), DateTime.UtcNow, MinMaxPeriod).Result;
