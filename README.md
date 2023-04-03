@@ -14,7 +14,7 @@ This project was created in Visual Studio 2022, DotNet-6.0.
 
 Press debug to run the script
 
-Indicators data was tested on Binance spot tradingview terminal.
+**Indicators data was tested on Binance spot tradingview terminal.**
 
 The libraries used for the example where:
 **Binance.Net-8.0.0 -JKorf, CryptoExchange.Net-5.0.0 -JKorf**
