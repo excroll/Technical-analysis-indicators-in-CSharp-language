@@ -17,6 +17,6 @@ Press debug to run the script
 Indicators data was tested on Binance spot tradingview terminal.
 
 The libraries used for the example where:
-Binance.Net-8.0.0 -JKorf, CryptoExchange.Net-5.0.0 -JKorf
+**Binance.Net-8.0.0 -JKorf, CryptoExchange.Net-5.0.0 -JKorf**
 
 Install if needed the necessary dependencies before testing from NuGet
