@@ -249,7 +249,7 @@ namespace Indicators_CSharp
                 /*var client2 = new BinanceClient();
                 var interval = 1;
                 var MinMaxPeriod = 100;  //klines period
-                decimal thresold = 0.3m; //deviatioan of min-max value klines
+                decimal deviation = 0.3m; //deviation of min-max value klines
 
                 var candles = client2.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute, DateTime.UtcNow.AddMinutes(-interval * period), DateTime.UtcNow, MinMaxPeriod).Result;
 
@@ -265,7 +265,7 @@ namespace Indicators_CSharp
 
                     decimal currentPrice = candles.Data.Last().ClosePrice;
                     var ticker = client2.SpotApi.ExchangeData.GetPriceAsync(symbol).Result;
-                    decimal range = (max - min) * thresold;
+                    decimal range = (max - min) * deviation;
 
                     if (currentPrice >= min - range && currentPrice <= min + range)
                     {
