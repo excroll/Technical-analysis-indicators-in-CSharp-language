@@ -180,12 +180,13 @@ namespace Indicators_CSharp
                 double[] tenkanSen = ichimoku.GetTenkanSen();
                 double[] kijunSen = ichimoku.GetKijunSen();
                 double[] senkouSpanA = ichimoku.GetSenkouSpanA();
+                double senkouSpanAFormat = Math.Round(senkouSpanA[senkouSpanA.Length - 1], 2);
                 double[] senkouSpanB = ichimoku.GetSenkouSpanB();
                 double kijunSenFormat = Math.Round(kijunSen[kijunSen.Length - 1], 2);
                 bool bear = false;
                 bool bull = false;
 
-                Console.WriteLine($"ICHIMOKU: Tenkan-sen: {tenkanSen[tenkanSen.Length - 1]}, Kijun-sen: {kijunSenFormat}, Close: {arrCloses1m[arrCloses1m.Length - 1]}, Senkou Span A: {senkouSpanA[senkouSpanA.Length - 1]}, Senkou Span B: {senkouSpanB[senkouSpanB.Length - 1]}");
+                Console.WriteLine($"ICHIMOKU: Tenkan-sen: {tenkanSen[tenkanSen.Length - 1]}, Kijun-sen: {kijunSenFormat}, Close: {arrCloses1m[arrCloses1m.Length - 1]}, Senkou Span A: {senkouSpanAFormat}, Senkou Span B: {senkouSpanB[senkouSpanB.Length - 1]}");
 
                 for (int i = 0; i < arrHigh1m.Length; i++)
                 {
@@ -204,13 +205,13 @@ namespace Indicators_CSharp
                 if (bull == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Bullish signal");
+                    Console.WriteLine("ICHIMOKU: Bullish signal");
                     Console.ResetColor();
                 }
                 else if (bear == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Bearish signal");
+                    Console.WriteLine("ICHIMOKU: Bearish signal");
                     Console.ResetColor();
                 }
 
