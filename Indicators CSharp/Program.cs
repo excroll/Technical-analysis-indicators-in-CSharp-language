@@ -30,14 +30,14 @@ namespace Indicators_CSharp
 
         //MACD
         //MACD candlestick period settings are in the method itself,
-        //use CTRL+H to replace TIMEFRAME (OneHour, FiveMinutes, etc.)
+        //use CTRL+H to replace TIMEFRAME (OneDay, FiveMinutes, etc.)
         static int fastEMA = 12;
         static int slowEMA = 26;
         static int signalEMA = 9;
 
         //Supertrend
         //The supertrend line may lag behind the exchange values when the Factor increases,
-        //it is recommended not more than 1-2
+        //it is recommended not more than 1-3
         static int STPeriod = 10; 
         static double STFactor = 3;
 
@@ -98,7 +98,7 @@ namespace Indicators_CSharp
             var client1m = new BinanceClient();
             while (true)
             {
-                var result1m = client1m.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute).Result;
+                var result1m = client1m.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneDay).Result;
                 if (result1m.Success)
                 {
                     foreach (var candle in result1m.Data)
@@ -201,11 +201,12 @@ namespace Indicators_CSharp
                 double[] senkouSpanA = ichimoku.GetSenkouSpanA();
                 double senkouSpanAFormat = Math.Round(senkouSpanA[senkouSpanA.Length - 1], 2);
                 double[] senkouSpanB = ichimoku.GetSenkouSpanB();
+                double senkouSpanBFormat = Math.Round(senkouSpanB[senkouSpanB.Length - 1], 2);
                 double kijunSenFormat = Math.Round(kijunSen[kijunSen.Length - 1], 2);
                 bool bear = false;
                 bool bull = false;
 
-                Console.WriteLine($"ICHIMOKU: Tenkan-sen: {tenkanSen[tenkanSen.Length - 1]}, Kijun-sen: {kijunSenFormat}, Close: {arrCloses1m[arrCloses1m.Length - 1]}, Senkou Span A: {senkouSpanAFormat}, Senkou Span B: {senkouSpanB[senkouSpanB.Length - 1]}");
+                Console.WriteLine($"ICHIMOKU: Tenkan-sen: {tenkanSen[tenkanSen.Length - 1]}, Kijun-sen: {kijunSenFormat}, Close: {arrCloses1m[arrCloses1m.Length - 1]}, Senkou Span A: {senkouSpanAFormat}, Senkou Span B: {senkouSpanBFormat}");
 
                 for (int i = 0; i < arrHigh1m.Length; i++)
                 {
@@ -251,7 +252,7 @@ namespace Indicators_CSharp
                 var MinMaxPeriod = 50;  //klines period (last 50 OHLC data klines)
                 decimal deviation = 0.3m; //deviation of min-max value klines
 
-                var candles = client2.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute, DateTime.UtcNow.AddMinutes(-interval * period), DateTime.UtcNow, MinMaxPeriod).Result;
+                var candles = client2.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneDay, DateTime.UtcNow.AddMinutes(-interval * period), DateTime.UtcNow, MinMaxPeriod).Result;
 
                 if (candles.Success)
                 {
@@ -377,7 +378,7 @@ namespace Indicators_CSharp
                 dynamic closePrices1m = new List<decimal>();
 
 
-                var result1m = client111m.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneMinute).Result;
+                var result1m = client111m.SpotApi.ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneDay).Result;
                 if (result1m.Success)
                 {
                     foreach (var candle in result1m.Data)
